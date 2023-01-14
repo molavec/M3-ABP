@@ -15,24 +15,11 @@
         <!-- text -->
         <div>
             <p>
-                <label for="inputName"></label>
+                <label for="inputName"> Ingresa un año </label>
                 <br>
-                <input type="number" name="inputName" id="inputName">
+                <input type="number" min="0" name="inputName" id="inputName">
             </p>
         </div>
-
-        <!-- radio  -->
-        <div>
-            <p>
-                <label for="inputName"></label>
-                <br>
-                <input type="radio" id="inputNameTrue" name="inputName" value="true">
-                <label for="inputNameTrue">Sí</label><br>
-                <input type="radio" id="inputNameFalse" name="inputName" value="false">
-                <label for="inputNameFalse">No</label><br>
-            </p>
-        </div>
-
 
         <!-- Submit -->
         <div>
@@ -42,8 +29,8 @@
 
     <!-- Result Messages -->
     <div>
-        <h3 id="success" style="display: none;">SUCCESS</h3>
-        <h3 id="error" style="display: none;">ERROR</h3>
+        <h3 id="success" style="display: none;">El año es <span style="color: green">BISIESTO</span></h3>
+        <h3 id="error" style="display: none;">El año es <span style="color: red">NO BISIESTO</span></h3>
     </div>
 
 
@@ -53,11 +40,19 @@
 
             event.preventDefault();
 
+            /* YOUR CODE GOES HERE */
             console.log(event.target.elements.inputName.value);
 
-            /* YOUR CODE GOES HERE */
+            const inputNumber = event.target.elements.inputName.value;
 
-            const result = true;
+            // No hacer nada en caso de negativos
+            if (inputNumber < 0 ) return;
+
+            const result = (
+                inputNumber % 4 == 0 && inputNumber % 100 !=0 
+                || inputNumber % 400 == 0 ) 
+                ? true
+                : false;
             
             //document.getElementById('form').style.display = "none";
             document.getElementById('success').style.display = "none"
@@ -66,7 +61,6 @@
             (result) 
                 ? document.getElementById('success').style.display = "block"
                 : document.getElementById('error').style.display = "block";
-
         }
 
 
