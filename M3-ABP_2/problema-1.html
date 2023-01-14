@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
 
-    <form onsubmit="submit()">
+    <form onsubmit="convert(event)">
         <div>
             <p>
-                <label for="usd">Ingrese USD$: (Ejemplo: 100.00)</label> 
+                <label for="usd">Ingrese USD$: (Ejemplo: 100.00)</label>
                 <br>
-                <input type="number" name="usd" id="usd">
+                <input type="number" min="0.00" step="0.01" name="usd" id="usd">
             </p>
-            <p style="color: red; display: none;">Ingrese un valor entero con hasta 2 decimales.</p>
+            <p id='alert' style="color: red; display: none;">Ingrese un valor entero con hasta 2 decimales.</p>
         </div>
         <div>
             <input type="submit">
@@ -25,11 +27,35 @@
         </div>
     </form>
 
-<script>
 
-const submit = () => {
+    <script>
 
-}
-</script>
+        function convert(event) {
+
+            event.preventDefault();
+
+            const CONVERTION_FACTOR = 745;
+            
+            // get input value
+            const usd = document.getElementById('usd').value;
+
+            // check input
+            // if(!isPrecise(usd)){
+            //     document.getElementById('clp').style.display = "block";
+            //     return;    
+            // } else {
+            //     document.getElementById('clp').style.display = "none";
+            // }
+
+            const clp = usd * CONVERTION_FACTOR;
+            document.getElementById('clp').innerText = Math.round(clp);
+
+        }
+
+        function isPrecise(num){
+            return /\d+\.\d{2}/gm.test(String(num));
+        }
+    </script>
 </body>
+
 </html>
