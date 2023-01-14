@@ -69,7 +69,7 @@
         </h3> 
         -->
 
-        <h3 id="resultMessage" style="display: none;"></h3>
+        <h3 id="resultMessage"></h3>
     </div>
 
 
@@ -91,9 +91,9 @@
                 || wonByA >= 6 && wonByA <= 7
                 || Math.abs(wonByA - wonByB) >=2
             ) {
-                (wonByA > wonByA) 
+                (wonByA > wonByB) 
                     ? document.getElementById('resultMessage').innerHTML= 'El <span style="color: green">JUGADOR A</span> ganó el set'
-                    : document.getElementById('resultMessage').innerHTML= 'El <span style="color: green">JUGADOR B</span> ganó el set'                
+                    : document.getElementById('resultMessage').innerHTML= 'El <span style="color: green">JUGADOR B</span> ganó el set';                
             } else {
                 document.getElementById('resultMessage').innerHTML= 'El set aún <span style="color: red">NO HA TERMINADO</span>';
             }
