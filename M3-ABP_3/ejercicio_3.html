@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- 
+
+        Un partido de tenis se divide en sets. 
+        
+        Para ganar un set, un jugador debe ganar 6 juegos, pero además debe haber ganado por lo menos dos juegos más que su rival. 
+        
+        Si el set está empatado a 5 juegos, el ganador es el primero que llegue a 7. 
+        
+        Si el set está empatado a 6 juegos, el set se define en un último juego, en cuyo caso el resultado final es 7-6.
+        
+        Sabiendo que el jugador A ha ganado m juegos, y el jugador B, n juegos, al periodista le gustaría saber si:
+
+        ● A ganó el set, o
+        ● B ganó el set, o
+        ● el set todavía no termina, o el resultado es inválido (por ejemplo, 8-6 o 7-3).
+
+     -->
+
+    <form id="form" onsubmit="submitOps(event)">
+
+        <!-- player A -->
+        <div>
+            <p>
+                <label for="wonByA"> Sets ganados por el jugador A </label>
+                <br>
+                <input type="number" min="0" name="wonByA" id="wonByA">
+            </p>
+        </div>
+        
+        <!-- player B -->
+        <div>
+            <p>
+                <label for="wonByB"> Sets ganados por el jugador B </label>
+                <br>
+                <input type="number" min="0" name="wonByB" id="wonByB">
+            </p>
+        </div>
+
+        <!-- Submit -->
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+
+    <!-- Result Messages -->
+    <div>
+
+        <!-- 
+        <h3 id="wonA" style="display: none;">
+            El <span style="color: green">JUGADOR A</span> ganó el partido 
+        </h3>
+        <h3 id="wonB" style="display: none;">
+            El <span style="color: green">JUGADOR B</span> ganó el partido 
+        </h3>
+        <h3 id="continueMatch" style="display: none;">
+            El set aún <span style="color: red">NO HA TERMINADO</span>
+        </h3> 
+        -->
+
+        <h3 id="resultMessage" style="display: none;"></h3>
+    </div>
+
+
+    <script>
+
+        function submitOps(event) {
+
+            event.preventDefault();
+
+            /* YOUR CODE GOES HERE */
+            console.log(event.target.elements.wonByA.value);
+            console.log(event.target.elements.wonByB.value);
+            
+            const wonByA = event.target.elements.wonByA.value;
+            const wonByB = event.target.elements.wonByB.value;
+
+            if( 
+                wonByA >= 6 && wonByA <= 7  
+                || wonByA >= 6 && wonByA <= 7
+                || Math.abs(wonByA - wonByB) >=2
+            ) {
+                (wonByA > wonByA) 
+                    ? document.getElementById('resultMessage').innerHTML= 'El <span style="color: green">JUGADOR A</span> ganó el set'
+                    : document.getElementById('resultMessage').innerHTML= 'El <span style="color: green">JUGADOR B</span> ganó el set'                
+            } else {
+                document.getElementById('resultMessage').innerHTML= 'El set aún <span style="color: red">NO HA TERMINADO</span>';
+            }
+
+        }
+
+
+    </script>
+</body>
+
+</html>
