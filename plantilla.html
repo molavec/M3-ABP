@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form id="form" onsubmit="submitOps(event)">
+
+        <!-- text -->
+        <div>
+            <p>
+                <label for="inputName"></label>
+                <br>
+                <input type="number" name="inputName" id="inputName">
+            </p>
+        </div>
+
+        <!-- radio  -->
+        <div>
+            <p>
+                <label for="inputName"></label>
+                <br>
+                <input type="radio" id="inputNameTrue" name="inputName" value="true">
+                <label for="inputNameTrue">Sí</label><br>
+                <input type="radio" id="inputNameFalse" name="inputName" value="false">
+                <label for="inputNameFalse">No</label><br>
+            </p>
+        </div>
+
+
+        <!-- Submit -->
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+
+    <!-- Result Messages -->
+    <div>
+        <h3 id="success" style="display: none;">SUCCESS</h3>
+        <h3 id="error" style="display: none;">ERROR</h3>
+    </div>
+
+
+    <script>
+
+        function submitOps(event) {
+
+            event.preventDefault();
+
+            /* YOUR CODE GOES HERE */
+
+        }
+
+
+    </script>
+</body>
+
+</html>
