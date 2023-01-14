@@ -21,19 +21,6 @@
             </p>
         </div>
 
-        <!-- radio  -->
-        <div>
-            <p>
-                <label for="inputName"></label>
-                <br>
-                <input type="radio" id="inputNameTrue" name="inputName" value="true">
-                <label for="inputNameTrue">Sí</label><br>
-                <input type="radio" id="inputNameFalse" name="inputName" value="false">
-                <label for="inputNameFalse">No</label><br>
-            </p>
-        </div>
-
-
         <!-- Submit -->
         <div>
             <input type="submit">
@@ -55,6 +42,15 @@
 
             /* YOUR CODE GOES HERE */
 
+            const result = true;
+            
+            //document.getElementById('form').style.display = "none";
+            document.getElementById('pass').style.display = "none"
+            document.getElementById('no-pass').style.display = "none";
+            
+            (result) 
+                ? document.getElementById('pass').style.display = "block"
+                : document.getElementById('no-pass').style.display = "block";
         }
 
 
