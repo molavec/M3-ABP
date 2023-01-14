@@ -15,24 +15,11 @@
         <!-- text -->
         <div>
             <p>
-                <label for="inputName"></label>
+                <label for="inputName"> Ingerse un número entre 1 y 100</label>
                 <br>
                 <input type="number" name="inputName" id="inputName">
             </p>
         </div>
-
-        <!-- radio  -->
-        <div>
-            <p>
-                <label for="inputName"></label>
-                <br>
-                <input type="radio" id="inputNameTrue" name="inputName" value="true">
-                <label for="inputNameTrue">Sí</label><br>
-                <input type="radio" id="inputNameFalse" name="inputName" value="false">
-                <label for="inputNameFalse">No</label><br>
-            </p>
-        </div>
-
 
         <!-- Submit -->
         <div>
@@ -42,8 +29,8 @@
 
     <!-- Result Messages -->
     <div>
-        <h3 id="success" style="display: none;">SUCCESS</h3>
-        <h3 id="error" style="display: none;">ERROR</h3>
+        <h3 id="success" style="display: none;">El número ingresado tiene opciones de ganar.</h3>
+        <h3 id="error" style="display: none;">El número ingresado no es favorable.</h3>
     </div>
 
 
@@ -54,17 +41,24 @@
             event.preventDefault();
 
             /* YOUR CODE GOES HERE */
+            console.log(event.target.elements.inputName.value);
 
-            const result = true;
+            const inputNumber = event.target.elements.inputName.value;
+
+            const result = (
+                5 < inputNumber && inputNumber < 15 
+                || inputNumber == 55
+                || inputNumber == 70 ) 
+                ? true
+                : false;
             
             //document.getElementById('form').style.display = "none";
-            document.getElementById('pass').style.display = "none"
-            document.getElementById('no-pass').style.display = "none";
+            document.getElementById('success').style.display = "none"
+            document.getElementById('error').style.display = "none";
             
             (result) 
-                ? document.getElementById('pass').style.display = "block"
-                : document.getElementById('no-pass').style.display = "block";
-
+                ? document.getElementById('success').style.display = "block"
+                : document.getElementById('error').style.display = "block";
         }
 
 
