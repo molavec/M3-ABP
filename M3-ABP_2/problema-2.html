@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form id="form" onsubmit="submitOps(event)">
+
+        <!-- Ser mayor de 18 años al momento de postular. -->
+        <div>
+            <p>
+                <label for="age">Ingersa tu edad</label>
+                <br>
+                <input type="number" name="age" id="age">
+            </p>
+        </div>
+
+        <!-- Celudad de identidad vigente  -->
+        <div>
+            <p>
+                <label for="isIdCardActive">¿Tu carnet está vigente?</label>
+                <br>
+                <input type="radio" id="isIdCardActiveTrue" name="isIdCardActive" value="true">
+                <label for="isIdCardActiveTrue">Sí</label><br>
+                <input type="radio" id="isIdCardActiveFalse" name="isIdCardActive" value="false">
+                <label for="isIdCardActiveFalse">No</label><br>
+            </p>
+        </div>
+
+        <!-- Ahorro min de 4UF a nombre del postulante, su cónyuge o conviviente civil  -->
+        <div>
+            <p>
+                <label for="hasSave">¿Tienes 4UF o más ahorrados en una cuenta bancaria para vivienda a tu nombre, tu cónyuge o conviviente civil?</label>
+                <br>
+                <input type="radio" id="hasSaveTrue" name="hasSave" value="true">
+                <label for="hasSaveTrue">Sí</label><br>
+                <input type="radio" id="hasSaveFalse" name="hasSave" value="false">
+                <label for="hasSaveFalse">No</label><br>
+            </p>
+        </div>
+
+        <!-- Pertenecer hasta el 70% más vulnerable de la población, según la calificación
+socioeconómica del Registro Social de Hogares  -->
+        <div>
+            <p>
+                <label for="vulnerability">¿Perteneces hasta el 70% más vulnerable de la población, según la calificación socioeconómica del Registro Social de Hogares?</label>
+                <br>
+                <input type="radio" id="vulnerabilityTrue" name="vulnerability" value="true">
+                <label for="vulnerabilityTrue">Sí</label><br>
+                <input type="radio" id="vulnerabilityFalse" name="vulnerability" value="false">
+                <label for="vulnerabilityFalse">No</label><br>
+            </p>
+        </div>
+
+        <!-- Postular al menos con su cónyuge, conviviente civil, conviviente o hijo o hija. En el caso de personas mayores de 60 años, no es necesario contar con núcleo familiar. -->
+        <div>
+            <p>
+                <label for="family">¿Postularás al menos con tu cónyuge, conviviente civil, conviviente o hijo o hija.?</label>
+                <br>
+                <input type="radio" id="familyTrue" name="family" value="true">
+                <label for="familyTrue">Sí</label><br>
+                <input type="radio" id="familyFalse" name="family" value="false">
+                <label for="familyFalse">No</label><br>
+            </p>
+        </div>
+
+        <!-- creditar que el monto total de ingresos del núcleo familiar está entre las 7 y 25 UF.-->
+        <div>
+            <p>
+                <label for="salary">¿Tienes como creditar que el monto total de ingresos del núcleo familiar está entre las 7 y 25 UF?</label>
+                <br>
+                <input type="radio" id="salaryTrue" name="salary" value="true">
+                <label for="salaryTrue">Sí</label><br>
+                <input type="radio" id="salaryFalse" name="salary" value="false">
+                <label for="salaryFalse">No</label><br>
+            </p>
+        </div>
+
+        <!--  No ser propietario, propietaria, beneficiario o beneficiaria de otros programas
+habitacionales del MINVU  -->
+        <div>
+            <p>
+                <label for="property">¿Eres propietario, propietaria, beneficiario o beneficiaria de otros programas habitacionales del MINVU?</label>
+                <br>
+                <input type="radio" id="propertyTrue" name="property" value="true">
+                <label for="propertyTrue">Sí</label><br>
+                <input type="radio" id="propertyFalse" name="property" value="false">
+                <label for="propertyFalse">No</label><br>
+            </p>
+        </div>
+
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+
+    <div>
+        <h3 id="pass" style="display: none;">Felicitaciones! Puedes postular al subsidio.</h3>
+        <h3 id="no-pass" style="display: none;">Lo sentimos. No cumples las condiciones para postular</h3>
+    </div>
+
+
+    <script>
+
+        function submitOps(event) {
+
+            event.preventDefault();
+
+            console.log(event.target.elements.isIdCardActive.value);
+
+            // get answers
+            const age = event.target.elements.age.value;
+            const isIdCardActive = stringToBoolean(event.target.elements.isIdCardActive.value);
+            const hasSave = stringToBoolean(event.target.elements.hasSave.value);
+            const vulnerability = stringToBoolean(event.target.elements.vulnerability.value);
+            const family = stringToBoolean(event.target.elements.family.value);
+            const salary = stringToBoolean(event.target.elements.salary.value);
+            const property = stringToBoolean(event.target.elements.property.value);
+
+            console.log('isIdCardActive', isIdCardActive);
+            console.log('property', property);
+
+            // check conditions
+            const canPostulate = checkConditions(
+                age,
+                isIdCardActive,
+                hasSave,
+                vulnerability,
+                family,
+                salary,
+                property,
+            );
+
+            //document.getElementById('form').style.display = "none";
+            document.getElementById('pass').style.display = "none"
+            document.getElementById('no-pass').style.display = "none";
+            
+            (canPostulate) 
+                ? document.getElementById('pass').style.display = "block"
+                : document.getElementById('no-pass').style.display = "block";
+        }
+
+        const checkConditions = (
+                age,
+                isIdCardActive,
+                hasSave,
+                vulnerability,
+                family,
+                salary,
+                property,
+            ) => {
+                
+                if(age < 18) return false;
+                //console.log('age');
+
+                if(!isIdCardActive) return false;
+                //console.log('isIdCardActive');
+
+                if(!hasSave) return false;
+                //console.log('hasSave');
+
+                if(!vulnerability) return false;
+                //console.log('vulnerability');
+
+                if(!family && age <= 60) return false;
+                //console.log('family');
+
+                if(!salary) return false;
+                //console.log('salary');
+
+                if(property) return false;
+                //console.log('property');
+
+                return true;
+            }
+
+        const stringToBoolean = (boolean) => boolean === 'true' ? true : false;
+
+    </script>
+</body>
+
+</html>
