@@ -10,64 +10,53 @@
 
 <body>
 
-    <form id="form" onsubmit="submitOps(event)">
 
-        <!-- text -->
-        <div>
-            <p>
-                <label for="inputName"></label>
-                <br>
-                <input type="number" name="inputName" id="inputName">
-            </p>
-        </div>
-
-        <!-- radio  -->
-        <div>
-            <p>
-                <label for="inputName"></label>
-                <br>
-                <input type="radio" id="inputNameTrue" name="inputName" value="true">
-                <label for="inputNameTrue">Sí</label><br>
-                <input type="radio" id="inputNameFalse" name="inputName" value="false">
-                <label for="inputNameFalse">No</label><br>
-            </p>
-        </div>
-
-
-        <!-- Submit -->
-        <div>
-            <input type="submit">
-        </div>
-    </form>
+    <!-- Submit -->
+    <!-- text -->
+    <div>
+        <p>
+            <label for="inputName">Buscar número. (Escribe un número y presiona Enter)</label>
+            <br>
+            <input onchange="search(event)" type="number" name="inputName" id="inputName">
+        </p>
+    </div>
 
     <!-- Result Messages -->
     <div>
-        <h3 id="success" style="display: none;">SUCCESS</h3>
-        <h3 id="error" style="display: none;">ERROR</h3>
+        <button onclick="sortNumbers()">Ordenar</button>
     </div>
 
+    <h1>Lista de números</h1>
+    <div><p id="array"></p></div>
 
     <script>
 
-        function submitOps(event) {
+        let numbers = [];
 
-            event.preventDefault();
+        const generateArray = () => {
+            numbers = [];
+            for (let i=0; i < 100; i++){
+                numbers.push(Math.floor(100 + Math.random() * 900));
+            }
 
-            console.log(event.target.elements.inputName.value);
+            document.getElementById('array').innerHTML = `${numbers.join('<br>')}`;
+        }
+
+        generateArray();
+
+
+
+        function sortNumbers() {
 
             /* YOUR CODE GOES HERE */
-
-            const result = true;
-            
-            //document.getElementById('form').style.display = "none";
-            document.getElementById('success').style.display = "none"
-            document.getElementById('error').style.display = "none";
-            
-            (result) 
-                ? document.getElementById('success').style.display = "block"
-                : document.getElementById('error').style.display = "block";
+                        
+            const result = numbers.sort();
+            document.getElementById('array').innerHTML = `${result.join('<br>')}`;
 
         }
+        
+
+        
 
 
     </script>
