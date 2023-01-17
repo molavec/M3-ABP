@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <!-- Submit -->
+    <form id="form" onsubmit="submitOps(event)">
+        <!-- text -->
+        <div>
+            <p>
+                <label for="inputName">Ingrese un número</label>
+                <br>
+                <input type="number" min=11 step=1 max="999" name="inputName" id="inputName">
+            </p>
+        </div>
+    
+        <!-- Submit -->
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+
+    <!-- Result Messages -->
+    <div>
+        <h3 id="result"></h3>
+    </div>
+
+    <script>
+
+        function submitOps(event) {
+
+            event.preventDefault();
+
+            /* YOUR CODE GOES HERE */
+            
+            console.log(event.target.elements.inputName.value);
+
+            const input = event.target.elements.inputName.value;
+            
+            let result = cuentaPares(input);
+            
+            document.getElementById('result').innerHTML = `La sumatoria de los pares entre 11 y ${input} es ${result}`;
+            
+        }
+
+        const cuentaPares = (number) => {
+            let count = 0;
+            for(let i=11; i <= number ; i++ ) {
+                if (i%2==0) count += i;
+            }
+            return count;
+        }
+        
+
+        
+
+
+    </script>
+</body>
+
+</html>
